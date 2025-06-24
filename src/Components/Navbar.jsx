@@ -40,10 +40,10 @@ export default function ModernNavbar () {
         <Link to="/" className='flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200'>
           <img src={Logo} alt='Logo' className='w-20 h-12 sm:w-28 sm:h-16' />
           <div className='leading-tight'>
-            <h1 className='font-extrabold text-gray-900 text-sm sm:text-md uppercase'>
+            <h1 className='font-extrabold text-gray-900 text-md sm:text-md uppercase'>
               Lots Eye
             </h1>
-            <p className='text-gray-500 text-xs hidden sm:block'>YOUR BRAND | OUR VISION</p>
+            <p className='text-gray-500 text-sm hidden sm:block'>Empowering Brand's Online.</p>
           </div>
         </Link>
 
