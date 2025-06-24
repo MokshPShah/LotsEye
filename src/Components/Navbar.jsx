@@ -1,153 +1,185 @@
-import { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { FaSearch, FaBars, FaTimes } from 'react-icons/fa'
+import { Link, useLocation } from 'react-router-dom'
 import Logo from '../assets/logo.png'
-import SearchModal from './SearchModal'
 
-export default function ModernNavbar () {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [showSearchModal, setShowSearchModal] = useState(false)
-  const [query, setQuery] = useState('')
+const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/service" },
+  { name: "Contact", path: "/contact" }
+];
 
-  const navLinks = [
-    { label: 'Home', path: '/' },
-    { label: 'Service', path: '/service' },
-    { label: 'Contact', path: '/contact' }
-  ]
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolledToWhite, setIsScrolledToWhite] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
+  }, [menuOpen]);
+
+  // Scroll detection for white sections on homepage
+  useEffect(() => {
+    if (!isHomePage) return;
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Check if we've scrolled past the hero section (approximately)
+      // The hero section is h-screen, so when we scroll past it, we're in the white section
+      if (scrollPosition > windowHeight * 0.8) {
+        setIsScrolledToWhite(true);
+      } else {
+        setIsScrolledToWhite(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHomePage]);
+
+  const linkVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.1 }
+    }),
+  };
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    if (showSearchModal) setMobileMenuOpen(false)
-  }, [showSearchModal])
+    const handleEsc = (e) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, []);
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className={`fixed top-0 w-full z-50 flex justify-center transition-all duration-300 ${
-        scrolled ? 'shadow-lg backdrop-blur-md' : ''
-      }`}
-    >
-      <div className='flex items-center justify-between w-[95%] sm:w-[90%] lg:w-[85%] xl:w-[80%] px-3 sm:px-6 py-3 sm:py-4 bg-white/70 rounded-full border border-white/40 backdrop-blur-md'>
-        {/* Logo */}
-        <Link to="/" className='flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200'>
-          <img src={Logo} alt='Logo' className='w-20 h-12 sm:w-28 sm:h-16' />
-          <div className='leading-tight'>
-            <h1 className='font-extrabold text-gray-900 text-md sm:text-md uppercase'>
-              Lots Eye
-            </h1>
-            <p className='text-gray-500 text-sm hidden sm:block'>Empowering Brand's Online.</p>
-          </div>
-        </Link>
+    <>
+      {/* Header */}
+      <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }} className="fixed top-4 w-full z-[99] flex justify-center px-4" >
 
-        {/* Nav Links */}
-        <nav className='hidden md:flex items-center space-x-6 lg:space-x-10'>
-          {navLinks.map(({ label, path }, i) => (
-            <Link
-              key={i}
-              to={path}
-              onClick={() => setMobileMenuOpen(false)}
-              className='text-gray-700 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors duration-200'
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
+        <div className="w-full max-w-xl md:max-w-3xl lg:max-w-7xl px-4 md:px-6 lg:px-10 py-4  flex items-center justify-between rounded-full shadow-xl bg-white/20 backdrop-blur-md border border-white/40">
 
-        {/* Right Section */}
-        <div className='flex items-center space-x-2 sm:space-x-4'>
-          {/* Search Icon */}
-          <button onClick={() => setShowSearchModal(true)} aria-label='Search' className='p-1'>
-            <Search className='text-gray-600 w-5 h-5 sm:w-6 sm:h-6' />
-          </button>
+          <Link to="/">
+            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }} className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-200" >
+              <img src={Logo} alt="Logo" className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain" />
+              <div className="leading-tight">
+                <h1 className={`text-xl sm:text-2xl font-extrabold tracking-wide ${
+                  isHomePage && !isScrolledToWhite ? 'text-white' : 'text-gray-900'
+                }`}>LOTS EYE</h1>
+                <p className={`text-xs sm:text-sm font-medium ${
+                  isHomePage && !isScrolledToWhite ? 'text-gray-200' : 'text-gray-600'
+                }`}>YOUR BRAND | OUR VISION</p>
+              </div>
+            </motion.div>
+          </Link>
 
-          {/* Contact Button */}
-          <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }} className='hidden sm:block'>
-            <Link
-              to='/contact'
-              className='bg-black text-white px-3 sm:px-5 py-1.5 sm:py-2 rounded-full font-semibold transition shadow hover:shadow-lg text-sm sm:text-base'
-            >
-              Contact
-            </Link>
-          </motion.div>
-
-          {/* Mobile Menu Button */}
-          <div className='md:hidden'>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label='Toggle Menu'
-              className='cursor-pointer p-1'
-            >
-              {mobileMenuOpen ? (
-                <X className='text-gray-600 w-5 h-5' />
-              ) : (
-                <svg
-                  className='w-5 h-5 text-gray-600'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M4 6h16M4 12h16M4 18h16'
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link, i) => (
+              <Link key={link.name} to={link.path}>
+                <motion.div custom={i} variants={linkVariants} initial="hidden"
+                  animate="visible" className={`relative font-medium transition duration-300 text-base ${
+                    isHomePage && !isScrolledToWhite
+                      ? (location.pathname === link.path ? 'text-white hover:text-gray-200' : 'text-gray-200 hover:text-white')
+                      : (location.pathname === link.path ? 'text-black hover:text-gray-700' : 'text-gray-700 hover:text-black')
+                  }`} >
+                  {link.name}
+                  <motion.span 
+                    whileHover={{ scaleX: 1 }}  
+                    className={`absolute left-0 -bottom-1 h-[2px] w-full origin-left transition-transform ${
+                      location.pathname === link.path 
+                        ? `scale-x-100 ${isHomePage && !isScrolledToWhite ? 'bg-white' : 'bg-black'}` 
+                        : `scale-x-0 ${isHomePage && !isScrolledToWhite ? 'bg-white' : 'bg-black'}`
+                    }`} 
                   />
-                </svg>
-              )}
+                </motion.div>
+              </Link>
+            ))}
+          </nav>
+
+          <div className="hidden lg:flex items-center gap-4">
+            {/* <div className="relative">
+              <AnimatedSearch />
+            </div> */}
+            <Link to="/contact">
+              <motion.button 
+                whileHover={{ 
+                  backgroundColor: isHomePage && !isScrolledToWhite ? "#ffffff" : "#222222", 
+                  color: isHomePage && !isScrolledToWhite ? "#000000" : "#ffffff",
+                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.25)", 
+                  transition: { duration: 0.3 } 
+                }} 
+                whileTap={{ scale: 0.95 }} 
+                className={`px-6 py-2 rounded-full font-semibold shadow-md transition-colors transition-shadow duration-300 focus:outline-none focus:ring-4 cursor-pointer ${
+                  isHomePage && !isScrolledToWhite
+                    ? 'bg-white text-black hover:bg-gray-100 focus:ring-white/50' 
+                    : 'bg-black text-white hover:bg-gray-800 focus:ring-gray-700'
+                }`}
+              >
+                Contact Me
+              </motion.button>
+            </Link>
+          </div>
+
+          <div className="lg:hidden">
+            <button onClick={() => setMenuOpen(!menuOpen)} className={`text-2xl ${
+              isHomePage && !isScrolledToWhite ? 'text-white' : 'text-gray-800'
+            }`}>
+              <FaBars />
             </button>
           </div>
         </div>
-      </div>
+      </motion.header>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            key='mobile-menu'
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className='md:hidden absolute top-full mt-2 w-[95%] sm:w-[90%] bg-white rounded-xl shadow-lg p-4 space-y-3'
-          >
-            {navLinks.map(({ label, path }, i) => (
-              <Link
-                key={i}
-                to={path}
-                onClick={() => setMobileMenuOpen(false)}
-                className='block text-gray-700 font-medium hover:text-blue-600 py-2 px-2 rounded-lg hover:bg-gray-50 transition-all duration-200'
-              >
-                {label}
+        {menuOpen && (
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.4 }} className="fixed top-0 left-0 w-full h-full bg-white/40 backdrop-blur-md z-[999] px-6 py-6 overflow-auto" >
+            <div className="flex justify-end">
+              <button onClick={() => setMenuOpen(false)} className="text-xl text-gray-700 hover:text-black" >
+                <FaTimes />
+              </button>
+            </div>
+
+            <div className="mt-8 flex flex-col items-center justify-center gap-6">
+              {navLinks.map((link, i) => (
+                <Link key={link.name} to={link.path} onClick={() => setMenuOpen(false)}>
+                  <motion.div
+                    className={`text-lg font-semibold hover:text-black transition ${
+                      location.pathname === link.path ? 'text-black' : 'text-gray-800'
+                    }`}
+                    variants={linkVariants} custom={i} initial="hidden" animate="visible" exit="hidden" >
+                    {link.name}
+                  </motion.div>
+                </Link>
+              ))}
+
+              {/* <div className="relative w-full max-w-md">
+                <FaSearch className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 text-lg" />
+                <input type="search" placeholder="Search something..."
+                  className="w-full pl-12 pr-4 py-3 rounded-full bg-white/70 backdrop-blur-sm text-base text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-black shadow-md transition" />
+              </div> */}
+
+              <Link to="/contact" onClick={() => setMenuOpen(false)}>
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                className="bg-black text-white px-6 py-2 rounded-full font-semibold shadow-md transition-all duration-300
+               hover:bg-gradient-to-r hover:from-[#3B82F6] hover:to-[#4E47E5] focus:outline-none focus:ring-4 focus:ring-gray-700">
+                  Contact Me
+                </motion.button>
               </Link>
-            ))}
-            {/* Mobile Contact Button */}
-            <Link
-              to='/contact'
-              onClick={() => setMobileMenuOpen(false)}
-              className='block bg-black text-white px-4 py-2 rounded-full font-semibold text-center mt-4 hover:bg-gray-800 transition-colors duration-200'
-            >
-              Contact
-            </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Search Modal */}
-      <SearchModal
-        isOpen={showSearchModal}
-        onClose={() => setShowSearchModal(false)}
-        query={query}
-        setQuery={setQuery}
-      />
-    </motion.header>
+    </>
   )
 }
+
+export default Navbar;

@@ -35,14 +35,14 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email",
-      details: "hello@lotseye.com",
-      link: "mailto:hello@lotseye.com"
+      details: "ayushiparmar9997@gmail.com",
+      link: "mailto:ayushiparmar9997@gmail.com"
     },
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Phone",
-      details: "+1 (555) 123-4567",
-      link: "tel:+15551234567"
+      details: "+91 6353292499",
+      link: "tel:+916353292499"
     },
     {
       icon: <MapPin className="w-6 h-6" />,
@@ -61,7 +61,7 @@ const Contact = () => {
       className="min-h-screen"
     >
       {/* Hero Section */}
-      <section className="py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20" data-aos="fade-up" data-aos-duration="1000">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.h1 
@@ -86,7 +86,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50" data-aos="fade-up" data-aos-duration="1200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Contact Form */}
@@ -96,6 +96,8 @@ const Contact = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: false, amount: 0.3 }}
               className="bg-white p-6 sm:p-8 rounded-xl shadow-lg"
+              data-aos="fade-right"
+              data-aos-delay="200"
             >
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">
                 Send us a Message
@@ -182,6 +184,8 @@ const Contact = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: false, amount: 0.3 }}
               className="space-y-6 sm:space-y-8"
+              data-aos="fade-left"
+              data-aos-delay="400"
             >
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">

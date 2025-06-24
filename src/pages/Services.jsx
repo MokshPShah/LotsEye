@@ -50,7 +50,7 @@ const Services = () => {
       className="min-h-screen"
     >
       {/* Hero Section */}
-      <section className="py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20" data-aos="fade-up" data-aos-duration="1000">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.h1 
@@ -75,7 +75,7 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50" data-aos="fade-up" data-aos-duration="1200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {services.map((service, index) => (
@@ -86,6 +86,8 @@ const Services = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 + (index * 0.1), duration: 0.6 }}
                 whileHover={{ y: -5, scale: 1.02 }}
+                data-aos="zoom-in"
+                data-aos-delay={index * 100}
               >
                 <div className="text-4xl sm:text-5xl mb-4 sm:mb-6">{service.icon}</div>
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
@@ -116,7 +118,7 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20" data-aos="fade-up" data-aos-duration="1000">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
