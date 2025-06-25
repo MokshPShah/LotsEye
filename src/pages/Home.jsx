@@ -1,7 +1,6 @@
 // src/pages/Home.jsx
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import Footer from '../Components/Footer'
 
 export default function Home () {
   const [currentText, setCurrentText] = useState('')
@@ -129,9 +128,9 @@ export default function Home () {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                Your brand, our vision. We create stunning digital experiences that
-                captivate your audience and drive results. Discover the power of
-                modern web design and development.
+                Your brand, our vision. We create stunning digital experiences
+                that captivate your audience and drive results. Discover the
+                power of modern web design and development.
               </motion.p>
 
               <motion.div
@@ -169,13 +168,17 @@ export default function Home () {
                 <div className='relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[450px] lg:h-[450px]'>
                   {/* Decorative Background Circle */}
                   <div className='absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full animate-pulse'></div>
-                  
+
                   {/* Photo Placeholder - Replace with actual image */}
                   <div className='absolute inset-4 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full flex items-center justify-center overflow-hidden shadow-2xl'>
                     {/* Placeholder Avatar */}
                     <div className='w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center'>
-                      <svg className='w-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 text-white' fill='currentColor' viewBox='0 0 24 24'>
-                        <path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/>
+                      <svg
+                        className='w-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 text-white'
+                        fill='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z' />
                       </svg>
                     </div>
                     {/* 
@@ -192,17 +195,31 @@ export default function Home () {
                   <motion.div
                     className='absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full opacity-80'
                     animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: 'easeInOut'
+                    }}
                   ></motion.div>
                   <motion.div
                     className='absolute -bottom-6 -left-6 w-6 h-6 bg-pink-400 rounded-full opacity-80'
                     animate={{ y: [0, -8, 0] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: 0.5
+                    }}
                   ></motion.div>
                   <motion.div
                     className='absolute top-1/4 -left-8 w-4 h-4 bg-green-400 rounded-full opacity-80'
                     animate={{ y: [0, -6, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: 1
+                    }}
                   ></motion.div>
                 </div>
               </motion.div>
@@ -292,8 +309,6 @@ export default function Home () {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

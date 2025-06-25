@@ -10,6 +10,7 @@ import ScrollToTop from './Components/ScrollToTop';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import Footer from './Components/Footer';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -43,6 +44,7 @@ function App() {
       <ScrollToTop />
       <ModernNavbar />
       <AnimatedRoutes />
+      <Footer/>
     </Router>
   );
 }
