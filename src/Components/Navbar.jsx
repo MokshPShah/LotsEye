@@ -31,11 +31,25 @@ const Navbar = () => {
       
       // Calculate approximate section positions
       const heroSectionEnd = windowHeight * 0.9;
-      const ctaSectionStart = documentHeight - windowHeight * 1.9; // Start white navbar earlier for CTA section
+      
+      // Responsive CTA section detection - much earlier on smaller devices
+      const isMobile = window.innerWidth < 768; // Mobile/tablet breakpoint
+      const isTablet = window.innerWidth < 1024; // Tablet breakpoint
+      
+      let ctaOffset;
+      if (isMobile) {
+        ctaOffset = windowHeight * 2.5; // Very early on mobile - when half of previous section is done
+      } else if (isTablet) {
+        ctaOffset = windowHeight * 2.2; // Earlier on tablet
+      } else {
+        ctaOffset = windowHeight * 1.9; // Desktop
+      }
+      
+      const ctaSectionStart = documentHeight - ctaOffset;
       
       // Use white navbar for:
       // 1. Homepage hero section
-      // 2. Call-to-action section (has background image)
+      // 2. Call-to-action section (has background image) - much earlier on mobile
       if (isHomePage && scrollPosition < heroSectionEnd) {
         setIsScrolledToWhite(false); // Use white navbar
       } else if (scrollPosition >= ctaSectionStart) {
