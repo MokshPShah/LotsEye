@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FaSearch, FaBars, FaTimes } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
 import Logo from '../assets/logo.png'
+import WhiteLogo from '../assets/white-logo.png'
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -21,24 +22,31 @@ const Navbar = () => {
     document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
   }, [menuOpen]);
 
-  // Scroll detection for white sections on homepage
+  // Scroll detection for sections with dark backgrounds
   useEffect(() => {
-    if (!isHomePage) return;
-
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
       
-      // Check if we've scrolled past the hero section (approximately)
-      // The hero section is h-screen, so when we scroll past it, we're in the white section
-      if (scrollPosition > windowHeight * 0.8) {
-        setIsScrolledToWhite(true);
+      // Calculate approximate section positions
+      const heroSectionEnd = windowHeight * 0.9;
+      const ctaSectionStart = documentHeight - windowHeight * 1.9; // Start white navbar earlier for CTA section
+      
+      // Use white navbar for:
+      // 1. Homepage hero section
+      // 2. Call-to-action section (has background image)
+      if (isHomePage && scrollPosition < heroSectionEnd) {
+        setIsScrolledToWhite(false); // Use white navbar
+      } else if (scrollPosition >= ctaSectionStart) {
+        setIsScrolledToWhite(false); // Use white navbar for CTA section
       } else {
-        setIsScrolledToWhite(false);
+        setIsScrolledToWhite(true); // Use dark navbar
       }
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Run once on mount
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHomePage]);
 
@@ -70,12 +78,21 @@ const Navbar = () => {
           <Link to="/">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }} className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-200" >
-              <img src={Logo} alt="Logo" className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain" />
+              <img 
+                src={isHomePage && !isScrolledToWhite ? WhiteLogo : Logo} 
+                alt="Logo" 
+                className={`object-contain object-center transition-all duration-300 ${
+                  isHomePage && !isScrolledToWhite 
+                    ? 'h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16' 
+                    : 'h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24'
+                }`}
+                style={{ maxWidth: '100%', maxHeight: '100%' }}
+              />
               <div className="leading-tight">
-                <h1 className={`text-xl sm:text-2xl font-extrabold tracking-wide ${
+                <h1 className={`text-xl sm:text-2xl font-extrabold tracking-wide transition-colors duration-300 ${
                   isHomePage && !isScrolledToWhite ? 'text-white' : 'text-gray-900'
                 }`}>LOTS EYE</h1>
-                <p className={`text-xs sm:text-sm font-medium ${
+                <p className={`text-xs sm:text-sm font-medium transition-colors duration-300 ${
                   isHomePage && !isScrolledToWhite ? 'text-gray-200' : 'text-gray-600'
                 }`}>YOUR BRAND | OUR VISION</p>
               </div>

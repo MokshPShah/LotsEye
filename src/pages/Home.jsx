@@ -1,6 +1,9 @@
-// src/pages/Home.jsx
+ // src/pages/Home.jsx
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import WhyChooseUs from '../Components/WhyChooseUs'
+import CallToAction from '../Components/CallToAction'
+import CoreServices from '../Components/Services'
 
 export default function Home () {
   const [currentText, setCurrentText] = useState('')
@@ -41,9 +44,7 @@ export default function Home () {
     <div className='min-h-screen'>
       {/* Hero Banner Section */}
       <section
-        className='relative h-screen flex items-center justify-center overflow-hidden'
-        data-aos='fade-up'
-        data-aos-duration='1000'
+        className='relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24'
       >
         {/* Background with gradient overlay */}
         <div className='absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900'>
@@ -103,10 +104,10 @@ export default function Home () {
         </div>
 
         {/* Content */}
-        <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[80vh]'>
+        <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-8rem)] sm:min-h-[calc(100vh-10rem)] md:min-h-[calc(100vh-12rem)]'>
             {/* Left Content */}
-            <div className='text-center lg:text-left mt-5'>
+            <div className='text-center lg:text-left'>
               <motion.div
                 initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -114,16 +115,16 @@ export default function Home () {
                 className=''
               >
                 {/* Typewriter Effect */}
-                <div className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white min-h-[150px] sm:min-h-[180px] md:min-h-[220px] lg:min-h-[260px] flex items-center justify-center lg:justify-start'>
-                  <span className='typewriter'>
+                <div className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white min-h-[120px] sm:min-h-[140px] md:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex items-center justify-center lg:justify-start'>
+                  <span className='typewriter leading-tight bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent'>
                     {currentText}
-                    <span className='animate-pulse'>|</span>
+                    <span className='animate-pulse text-blue-400'>|</span>
                   </span>
                 </div>
               </motion.div>
 
               <motion.p
-                className='text-lg sm:text-xl md:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed'
+                className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-8 sm:mb-10 md:mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0'
                 initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
@@ -134,20 +135,20 @@ export default function Home () {
               </motion.p>
 
               <motion.div
-                className='flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center'
+                className='flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start items-center px-4 sm:px-0'
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
               >
                 <motion.button
-                  className='bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-semibold text-lg sm:text-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 w-full sm:w-auto transform hover:scale-105'
+                  className='bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full font-semibold text-base sm:text-lg md:text-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 w-full sm:w-auto transform hover:scale-105'
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Get Started Today
                 </motion.button>
                 <motion.button
-                  className='border-2 border-white text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-semibold text-lg sm:text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 w-full sm:w-auto transform hover:scale-105'
+                  className='border-2 border-white text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full font-semibold text-base sm:text-lg md:text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 w-full sm:w-auto transform hover:scale-105'
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -157,7 +158,7 @@ export default function Home () {
             </div>
 
             {/* Right Content - Person Photo */}
-            <div className='flex justify-center lg:justify-end'>
+            <div className='flex justify-center lg:justify-end mt-8 lg:mt-0'>
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -165,7 +166,7 @@ export default function Home () {
                 className='relative'
               >
                 {/* Person Photo Container */}
-                <div className='relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[450px] lg:h-[450px]'>
+                <div className='relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px]'>
                   {/* Decorative Background Circle */}
                   <div className='absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full animate-pulse'></div>
 
@@ -174,7 +175,7 @@ export default function Home () {
                     {/* Placeholder Avatar */}
                     <div className='w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center'>
                       <svg
-                        className='w-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 text-white'
+                        className='w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 xl:w-48 xl:h-48 text-white'
                         fill='currentColor'
                         viewBox='0 0 24 24'
                       >
@@ -228,7 +229,7 @@ export default function Home () {
 
           {/* Scroll indicator */}
           <motion.div
-            className='absolute bottom-8 left-1/2 transform -translate-x-1/2'
+            className='absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 hidden sm:block'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.6 }}
@@ -251,64 +252,13 @@ export default function Home () {
         </div>
       </section>
 
+      <div className='pt-16'>
+        {/* Service Section */}
+        <CoreServices />
+      </div>
       {/* Features Section */}
-      <section
-        className='py-12 sm:py-16 lg:py-20 bg-gray-50'
-        data-aos='fade-up'
-        data-aos-duration='1200'
-      >
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='text-center mb-12 sm:mb-16'>
-            <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4'>
-              Why Choose LotsEye?
-            </h2>
-            <p className='text-base max-w-2xl mx-auto'>
-              We combine creativity with technology to deliver exceptional
-              results
-            </p>
-          </div>
-
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8'>
-            {[
-              {
-                title: 'Responsive Design',
-                description:
-                  'Beautiful designs that work perfectly on all devices and screen sizes',
-                icon: '📱'
-              },
-              {
-                title: 'Modern Technology',
-                description:
-                  'Built with the latest technologies for optimal performance and scalability',
-                icon: '⚡'
-              },
-              {
-                title: 'User Experience',
-                description:
-                  'Intuitive interfaces that provide exceptional user experiences',
-                icon: '✨'
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                className='bg-white p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300'
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
-                whileHover={{ y: -5 }}
-              >
-                <div className='text-3xl sm:text-4xl mb-4'>{feature.icon}</div>
-                <h3 className='text-lg sm:text-xl font-semibold text-gray-800 mb-3'>
-                  {feature.title}
-                </h3>
-                <p className='text-sm sm:text-base text-gray-600 leading-relaxed'>
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WhyChooseUs />
+      <CallToAction />
     </div>
   )
 }

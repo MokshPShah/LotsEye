@@ -263,8 +263,6 @@ const Contact = () => {
       {/* Hero Section */}
       <section
         className='py-12 sm:py-16 lg:py-20'
-        data-aos='fade-up'
-        data-aos-duration='1000'
       >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center'>
@@ -292,8 +290,6 @@ const Contact = () => {
       {/* Contact Section */}
       <section
         className='py-12 sm:py-16 lg:py-20 bg-gray-50'
-        data-aos='fade-up'
-        data-aos-duration='1200'
       >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12'>
@@ -302,10 +298,8 @@ const Contact = () => {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.3 }}
               className='bg-white p-6 sm:p-8 rounded-xl shadow-lg'
-              data-aos='fade-right'
-              data-aos-delay='200'
             >
               <h2 className='text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8'>
                 Send us a Message
@@ -446,10 +440,8 @@ const Contact = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.3 }}
               className='space-y-6 sm:space-y-8'
-              data-aos='fade-left'
-              data-aos-delay='400'
             >
               <div>
                 <h2 className='text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6'>
@@ -469,7 +461,7 @@ const Contact = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05, duration: 0.6 }}
-                    viewport={{ once: false, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     whileHover={{ y: -2 }}
                   >
                     <div className='flex-shrink-0 text-blue-600'>
@@ -496,7 +488,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
-                viewport={{ once: false, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.3 }}
               >
                 <h3 className='text-lg sm:text-xl font-semibold text-gray-800 mb-3 sm:mb-4'>
                   Business Hours
